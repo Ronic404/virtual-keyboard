@@ -1,6 +1,7 @@
-import {numberKeys, enKeys, enKeysCaps, ruKeys, ruKeysCaps} from './buttons.js';
+import {numberKeys, enKeys, ruKeys} from './buttons.js';
 
 window.onload = () => {
+  setValueLang();
   addTextarea();
   addKeyboard();
   addLangSwitcher();
@@ -11,6 +12,10 @@ window.onload = () => {
 
 let lang = 'ru';
 let numberKey = 0;
+
+const setValueLang = () => {
+  if(lang !== localStorage.getItem('language')) lang = 'en';
+}
 
 const addTextarea = () => {
   const textArea = document.createElement('textarea');
@@ -73,11 +78,13 @@ const addLangSwitcher = () => {
 
     if(lang === 'ru') {
       lang = 'en';
+      localStorage.setItem('language', lang);
       numberKey = 0; 
       document.querySelector('ul').innerHTML = '';
       addKeys();
     } else {
       lang = 'ru';
+      localStorage.setItem('language', lang);
       numberKey = 0; 
       document.querySelector('ul').innerHTML = '';
       addKeys();
@@ -132,8 +139,3 @@ const addPressButtons = () => {
 //     event.target.classList.toggle('pressed');
 //   });
 // }
-
-
-
-
-
